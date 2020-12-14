@@ -6,56 +6,50 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface FunnelCards {
+        "cardBgColor": string;
+        "cardFiveInfo": any;
+        "cardFourInfo": any;
+        "cardOneInfo": any;
+        "cardSixInfo": any;
+        "cardTextColor": string;
+        "cardThreeInfo": any;
+        "cardTwoInfo": any;
+        "cardsNumber": number;
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLFunnelCardsElement extends Components.FunnelCards, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLFunnelCardsElement: {
+        prototype: HTMLFunnelCardsElement;
+        new (): HTMLFunnelCardsElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "funnel-cards": HTMLFunnelCardsElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface FunnelCards {
+        "cardBgColor"?: string;
+        "cardFiveInfo"?: any;
+        "cardFourInfo"?: any;
+        "cardOneInfo"?: any;
+        "cardSixInfo"?: any;
+        "cardTextColor"?: string;
+        "cardThreeInfo"?: any;
+        "cardTwoInfo"?: any;
+        "cardsNumber"?: number;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "funnel-cards": FunnelCards;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "funnel-cards": LocalJSX.FunnelCards & JSXBase.HTMLAttributes<HTMLFunnelCardsElement>;
         }
     }
 }
