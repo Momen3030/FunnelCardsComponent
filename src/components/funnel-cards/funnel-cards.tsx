@@ -86,6 +86,8 @@ export class FunnelCards {
     if (this.cardOneInfo != null) {
 
       this.internalCard1 = JSON.parse(this.cardOneInfo);
+      console.log(this.internalCard1);
+      
 
     }
     if (this.cardTwoInfo != null) {
@@ -299,7 +301,7 @@ export class FunnelCards {
       (item as HTMLElement).style.backgroundColor=(this.cardBgColor?this.cardBgColor:'#2c6fd1');
       (item as HTMLElement).style.color=(this.cardTextColor?this.cardTextColor:'#fff');
       (item as HTMLElement).style.boxShadow=`20px 20px 60px rgba(34,50,84,0.5), 1px 1px 0px 1px ${(this.cardShdowColor?this.cardShdowColor:'#3f58e3')}`;
-      
+
     })
   }
   render() {
@@ -308,7 +310,7 @@ export class FunnelCards {
       <div class="FunnelCards">
         {this.card.map(item =>
           <div class="card first" >
-            <img src={item.img}></img>
+            <img src={item.img}   style={{"border-radius":"50%"}}></img>
             <h3> {item.title} </h3>
             <span>{item.subtitle} </span>
           </div>
