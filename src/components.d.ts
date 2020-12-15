@@ -11,6 +11,7 @@ export namespace Components {
         "cardFiveInfo": any;
         "cardFourInfo": any;
         "cardOneInfo": any;
+        "cardShdowColor": string;
         "cardSixInfo": any;
         "cardTextColor": string;
         "cardThreeInfo": any;
@@ -35,6 +36,7 @@ declare namespace LocalJSX {
         "cardFiveInfo"?: any;
         "cardFourInfo"?: any;
         "cardOneInfo"?: any;
+        "cardShdowColor"?: string;
         "cardSixInfo"?: any;
         "cardTextColor"?: string;
         "cardThreeInfo"?: any;

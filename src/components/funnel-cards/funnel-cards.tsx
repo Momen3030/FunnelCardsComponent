@@ -79,6 +79,8 @@ export class FunnelCards {
   @Prop() cardBgColor: string;
  
   @Prop() cardTextColor: string;
+  @Prop() cardShdowColor: string;
+
 
   constructor() {
     if (this.cardOneInfo != null) {
@@ -296,7 +298,8 @@ export class FunnelCards {
     anchors.forEach(item=>{
       (item as HTMLElement).style.backgroundColor=(this.cardBgColor?this.cardBgColor:'#2c6fd1');
       (item as HTMLElement).style.color=(this.cardTextColor?this.cardTextColor:'#fff');
-      // this.card.map((i=>item.classList.add(`${i.cls}`)))
+      (item as HTMLElement).style.boxShadow=`20px 20px 60px rgba(34,50,84,0.5), 1px 1px 0px 1px ${(this.cardShdowColor?this.cardShdowColor:'#3f58e3')}`;
+      
     })
   }
   render() {
