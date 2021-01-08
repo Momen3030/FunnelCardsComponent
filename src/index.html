@@ -1,31 +1,63 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
     <title>Stencil Component Starter</title>
 
     <script type="module" src="/build/funnelcards.esm.js"></script>
     <script nomodule src="/build/funnelcards.js"></script>
-  </head>
-  <body>
-  
-    <funnel-cards
-    cards-number="6"
-    card-one-info='[{"img":"https://dummyimage.com/300x300/f5f2f5/0011ff","title":"ttt","subtitle":"fsds"}]'
-    card-two-info='[{"img":"https://dummyimage.com/300x300/f5f2f5/0011ff","title":"ttt","subtitle":"fsds"}]'
-    card-three-info='[{"img":"https://dummyimage.com/300x300/f5f2f5/0011ff","title":"ttt","subtitle":"fsds"}]'
-    card-four-info='[{"img":"https://dummyimage.com/300x300/f5f2f5/0011ff","title":"ttt","subtitle":"fsds"}]'
-    card-five-info='[{"img":"https://dummyimage.com/300x300/f5f2f5/0011ff","title":"ttt","subtitle":"fsds"}]'
-    card-six-info='[{"title":"ttt","subtitle":"fsds"}]'
-    card-text-color="black" 
-    card-bg-color="blue"
-    card-shdow-color="red"
-    ></funnel-cards>
+</head>
 
-    <!-- card-bg-color="red"
-    card-text-color="blue" -->
+<body>
+    <script>
+        const component = document.createElement('funnel-cards');
+        component.setAttribute('content', JSON.stringify({
+            attributes: {
+                cardsNumber: 4,
+                cardBgColor: "blue",
+                cardTextColor: "white",
+                cardShdowColor: "blue",
+                cardOneInfo: {
+                    img: "https://www.flaticon.com/svg/static/icons/svg/599/599979.svg",
+                    title: "TTTtt",
+                    subtitle: "ttt1"
+                },
+                cardTwoInfo: {
+                    img: "https://www.flaticon.com/svg/static/icons/svg/599/599979.svg",
+                    title: "TTTtt2",
+                    subtitle: "TTTT2"
+                },
+                cardThreeInfo: {
+                    img: "https://www.flaticon.com/svg/static/icons/svg/599/599979.svg",
+                    title: "TTTtt2",
+                    subtitle: "TTTT2"
+                },
+                cardFourInfo: {
+                    img: "https://www.flaticon.com/svg/static/icons/svg/599/599979.svg",
+                    title: "TTTtt2",
+                    subtitle: "TTTT2"
+                },
+                cardFiveInfo: {
+                    img: "https://www.flaticon.com/svg/static/icons/svg/599/599979.svg",
+                    title: "TTTtt2",
+                    subtitle: "TTTT2"
+                },
+                cardSixInfo: {
+                    img: "https://www.flaticon.com/svg/static/icons/svg/599/599979.svg",
+                    title: "TTTtt2",
+                    subtitle: "TTTT2"
+                }
+
+            }
+        }));
+        document.body.appendChild(component);
+    </script>
 
 
-  </body>
+
+
+</body>
+
 </html>

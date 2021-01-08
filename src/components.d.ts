@@ -17,6 +17,7 @@ export namespace Components {
         "cardThreeInfo": any;
         "cardTwoInfo": any;
         "cardsNumber": number;
+        "content": string;
     }
 }
 declare global {
@@ -42,6 +43,8 @@ declare namespace LocalJSX {
         "cardThreeInfo"?: any;
         "cardTwoInfo"?: any;
         "cardsNumber"?: number;
+        "content"?: string;
+        "onUpdateSatisfiedEvent"?: (event: CustomEvent<any>) => void;
     }
     interface IntrinsicElements {
         "funnel-cards": FunnelCards;

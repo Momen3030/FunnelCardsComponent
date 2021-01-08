@@ -1,4 +1,4 @@
-import { Component, h, Element, Prop } from '@stencil/core';
+import { Component, h, Element, Prop, State,Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'funnel-cards',
@@ -80,115 +80,113 @@ export class FunnelCards {
  
   @Prop() cardTextColor: string;
   @Prop() cardShdowColor: string;
+  @Prop() content: string;
+  @State() satate: any[] = [];
+  @Event() updateSatisfiedEvent: EventEmitter<any>;
 
+  allClicked(ind){
+      // const obj2=this.satate.find((o)=>o.index==ind);
+      const obj2 = this.satate.findIndex((o) => o.index == ind);
+      this.satate[obj2]["clicked"] = true;
+      // console.log(obj2);
+      // console.log(this.satate);
+      if (this.satate.every((ox) => ox.clicked)) {
+  
+        this.updateSatisfiedEvent.emit(this.content)
+  
+        console.log("All clicked");
+  
+      }
+  }
+
+  private getContent(): any {
+
+    const con = JSON.parse(this.content);
+    return con.attributes;
+  }
 
   constructor() {
-    if (this.cardOneInfo != null) {
-
-      this.internalCard1 = JSON.parse(this.cardOneInfo);
-      console.log(this.internalCard1);
-      
-
-    }
-    if (this.cardTwoInfo != null) {
-      this.internalCard2 = JSON.parse(this.cardTwoInfo);
-    }
-    if (this.cardThreeInfo != null) {
-      this.internalCard3 = JSON.parse(this.cardThreeInfo);
-    }
-    if (this.cardFourInfo != null) {
-      this.internalCard4 = JSON.parse(this.cardFourInfo);
+    for (let i = 0; i < this.getContent().cardsNumber; i++) {
+      this.satate.push({ index: i, clicked: false });
     }
 
 
-    if (this.cardFiveInfo != null) {
-      this.internalCard5 = JSON.parse(this.cardFiveInfo);
-    }
+    if (this.card.length != this.getContent().cardsNumber) {
 
-
-    if (this.cardSixInfo != null) {
-      this.internalCard6 = JSON.parse(this.cardSixInfo);
-    }
-
-
-
-
-    if (this.card.length != this.cardsNumber) {
-
-      if (this.cardsNumber == 1) {
+      if (this.getContent().cardsNumber == 1) {
         this.card.length = 0;
         this.card.push({
-          img: (this.internalCard1[0].img ? this.internalCard1[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-          title: (this.internalCard1[0].title ? this.internalCard1[0].title : ''),
-          subtitle: (this.internalCard1[0].subtitle ? this.internalCard1[0].subtitle : '')
+          img: (this.getContent().cardOneInfo.img ? this.getContent().cardOneInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+          title: (this.getContent().cardOneInfo.title ? this.getContent().cardOneInfo.title : ''),
+          subtitle: (this.getContent().cardOneInfo.subtitle ? this.getContent().cardOneInfo.subtitle : '')
         })
       }
 
-      if (this.cardsNumber == 2) {
+      if (this.getContent().cardsNumber == 2) {
         this.card.length = 0;
         this.card.push({
-          img: (this.internalCard1[0].img ? this.internalCard1[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-          title: (this.internalCard1[0].title ? this.internalCard1[0].title : ''),
-          subtitle: (this.internalCard1[0].subtitle ? this.internalCard1[0].subtitle : '')
+          img: (this.getContent().cardOneInfo.img ? this.getContent().cardOneInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+          title: (this.getContent().cardOneInfo.title ? this.getContent().cardOneInfo.title : ''),
+          subtitle: (this.getContent().cardOneInfo.subtitle ? this.getContent().cardOneInfo.subtitle : '')
         },
 
           {
-            img: (this.internalCard2[0].img ? this.internalCard2[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-            title: (this.internalCard2[0].title ? this.internalCard2[0].title : ''),
-            subtitle: (this.internalCard2[0].subtitle ? this.internalCard2[0].subtitle : '')
+            img: (this.getContent().cardTwoInfo.img ? this.getContent().cardTwoInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+            title: (this.getContent().cardTwoInfo.title ? this.getContent().cardTwoInfo.title : ''),
+            subtitle: (this.getContent().cardTwoInfo.subtitle ? this.getContent().cardTwoInfo.subtitle : '')
           }
         )
       }
 
 
 
-      if (this.cardsNumber == 3) {
+      if (this.getContent().cardsNumber == 3) {
         this.card.length = 0;
         this.card.push({
-          img: (this.internalCard1[0].img ? this.internalCard1[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-          title: (this.internalCard1[0].title ? this.internalCard1[0].title : ''),
-          subtitle: (this.internalCard1[0].subtitle ? this.internalCard1[0].subtitle : '')
+          img: (this.getContent().cardOneInfo.img ? this.getContent().cardOneInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+          title: (this.getContent().cardOneInfo.title ? this.getContent().cardOneInfo.title : ''),
+          subtitle: (this.getContent().cardOneInfo.subtitle ? this.getContent().cardOneInfo.subtitle : '')
         },
 
           {
-            img: (this.internalCard2[0].img ? this.internalCard2[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-            title: (this.internalCard2[0].title ? this.internalCard2[0].title : ''),
-            subtitle: (this.internalCard2[0].subtitle ? this.internalCard2[0].subtitle : '')
+            img: (this.getContent().cardTwoInfo.img ? this.getContent().cardTwoInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+            title: (this.getContent().cardTwoInfo.title ? this.getContent().cardTwoInfo.title : ''),
+            subtitle: (this.getContent().cardTwoInfo.subtitle ? this.getContent().cardTwoInfo.subtitle : '')
           }
           ,
           {
-            img: (this.internalCard3[0].img ? this.internalCard3[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-            title: (this.internalCard3[0].title ? this.internalCard3[0].title : ''),
-            subtitle: (this.internalCard3[0].subtitle ? this.internalCard3[0].subtitle : '')
+            img: (this.getContent().cardThreeInfo.img ? this.getContent().cardThreeInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+            title: (this.getContent().cardThreeInfo.title ? this.getContent().cardThreeInfo.title : ''),
+            subtitle: (this.getContent().cardThreeInfo.subtitle ? this.getContent().cardThreeInfo.subtitle : '')
           }
 
         )
       }
    
-      if (this.cardsNumber == 4) {
+      if (this.getContent().cardsNumber == 4) {
         this.card.length = 0;
         this.card.push({
-          img: (this.internalCard1[0].img ? this.internalCard1[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-          title: (this.internalCard1[0].title ? this.internalCard1[0].title : ''),
-          subtitle: (this.internalCard1[0].subtitle ? this.internalCard1[0].subtitle : '')
+          img: (this.getContent().cardOneInfo.img ? this.getContent().cardOneInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+          title: (this.getContent().cardOneInfo.title ? this.getContent().cardOneInfo.title : ''),
+          subtitle: (this.getContent().cardOneInfo.subtitle ? this.getContent().cardOneInfo.subtitle : '')
         },
 
           {
-            img: (this.internalCard2[0].img ? this.internalCard2[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-            title: (this.internalCard2[0].title ? this.internalCard2[0].title : ''),
-            subtitle: (this.internalCard2[0].subtitle ? this.internalCard2[0].subtitle : '')
+            img: (this.getContent().cardTwoInfo.img ? this.getContent().cardTwoInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+            title: (this.getContent().cardTwoInfo.title ? this.getContent().cardTwoInfo.title : ''),
+            subtitle: (this.getContent().cardTwoInfo.subtitle ? this.getContent().cardTwoInfo.subtitle : '')
           }
           ,
           {
-            img: (this.internalCard3[0].img ? this.internalCard3[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-            title: (this.internalCard3[0].title ? this.internalCard3[0].title : ''),
-            subtitle: (this.internalCard3[0].subtitle ? this.internalCard3[0].subtitle : '')
+            img: (this.getContent().cardThreeInfo.img ? this.getContent().cardThreeInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+            title: (this.getContent().cardThreeInfo.title ? this.getContent().cardThreeInfo.title : ''),
+            subtitle: (this.getContent().cardThreeInfo.subtitle ? this.getContent().cardThreeInfo.subtitle : '')
           }
           ,
           {
-            img: (this.internalCard4[0].img ? this.internalCard4[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-            title: (this.internalCard4[0].title ? this.internalCard4[0].title : ''),
-            subtitle: (this.internalCard4[0].subtitle ? this.internalCard4[0].subtitle : '')
+            img: (this.getContent().cardFourInfo.img ? this.getContent().cardFourInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+            title: (this.getContent().cardFourInfo.title ? this.getContent().cardFourInfo.title : ''),
+            subtitle: (this.getContent().cardFourInfo.subtitle ? this.getContent().cardFourInfo.subtitle : '')
           }
         )
       }  
@@ -196,36 +194,36 @@ export class FunnelCards {
 
  
 
-      if (this.cardsNumber == 5) {
+      if (this.getContent().cardsNumber == 5) {
         this.card.length = 0;
         this.card.push({
-          img: (this.internalCard1[0].img ? this.internalCard1[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-          title: (this.internalCard1[0].title ? this.internalCard1[0].title : ''),
-          subtitle: (this.internalCard1[0].subtitle ? this.internalCard1[0].subtitle : '')
+          img: (this.getContent().cardOneInfo.img ? this.getContent().cardOneInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+          title: (this.getContent().cardOneInfo.title ? this.getContent().cardOneInfo.title : ''),
+          subtitle: (this.getContent().cardOneInfo.subtitle ? this.getContent().cardOneInfo.subtitle : '')
         },
 
           {
-            img: (this.internalCard2[0].img ? this.internalCard2[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-            title: (this.internalCard2[0].title ? this.internalCard2[0].title : ''),
-            subtitle: (this.internalCard2[0].subtitle ? this.internalCard2[0].subtitle : '')
+            img: (this.getContent().cardTwoInfo.img ? this.getContent().cardTwoInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+            title: (this.getContent().cardTwoInfo.title ? this.getContent().cardTwoInfo.title : ''),
+            subtitle: (this.getContent().cardTwoInfo.subtitle ? this.getContent().cardTwoInfo.subtitle : '')
           }
           ,
           {
-            img: (this.internalCard3[0].img ? this.internalCard3[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-            title: (this.internalCard3[0].title ? this.internalCard3[0].title : ''),
-            subtitle: (this.internalCard3[0].subtitle ? this.internalCard3[0].subtitle : '')
+            img: (this.getContent().cardThreeInfo.img ? this.getContent().cardThreeInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+            title: (this.getContent().cardThreeInfo.title ? this.getContent().cardThreeInfo.title : ''),
+            subtitle: (this.getContent().cardThreeInfo.subtitle ? this.getContent().cardThreeInfo.subtitle : '')
           }
           ,
           {
-            img: (this.internalCard4[0].img ? this.internalCard4[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-            title: (this.internalCard4[0].title ? this.internalCard4[0].title : ''),
-            subtitle: (this.internalCard4[0].subtitle ? this.internalCard4[0].subtitle : '')
+            img: (this.getContent().cardFourInfo.img ? this.getContent().cardFourInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+            title: (this.getContent().cardFourInfo.title ? this.getContent().cardFourInfo.title : ''),
+            subtitle: (this.getContent().cardFourInfo.subtitle ? this.getContent().cardFourInfo.subtitle : '')
           }
           ,
           {
-            img: (this.internalCard5[0].img ? this.internalCard5[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-            title: (this.internalCard5[0].title ? this.internalCard5[0].title : ''),
-            subtitle: (this.internalCard5[0].subtitle ? this.internalCard5[0].subtitle : '')
+            img: (this.getContent().cardFiveInfo.img ? this.getContent().cardFiveInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+            title: (this.getContent().cardFiveInfo.title ? this.getContent().cardFiveInfo.title : ''),
+            subtitle: (this.getContent().cardFiveInfo.subtitle ? this.getContent().cardFiveInfo.subtitle : '')
           }
         )
       }  
@@ -239,38 +237,38 @@ export class FunnelCards {
     } else {   
       this.card.length = 0;
       this.card.push({
-        img: (this.internalCard1[0].img ? this.internalCard1[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-        title: (this.internalCard1[0].title ? this.internalCard1[0].title : ''),
-        subtitle: (this.internalCard1[0].subtitle ? this.internalCard1[0].subtitle : '')
+        img: (this.getContent().cardOneInfo.img ? this.getContent().cardOneInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+        title: (this.getContent().cardOneInfo.title ? this.getContent().cardOneInfo.title : ''),
+        subtitle: (this.getContent().cardOneInfo.subtitle ? this.getContent().cardOneInfo.subtitle : '')
       },
 
         {
-          img: (this.internalCard2[0].img ? this.internalCard2[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-          title: (this.internalCard2[0].title ? this.internalCard2[0].title : ''),
-          subtitle: (this.internalCard2[0].subtitle ? this.internalCard2[0].subtitle : '')
+          img: (this.getContent().cardTwoInfo.img ? this.getContent().cardTwoInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+          title: (this.getContent().cardTwoInfo.title ? this.getContent().cardTwoInfo.title : ''),
+          subtitle: (this.getContent().cardTwoInfo.subtitle ? this.getContent().cardTwoInfo.subtitle : '')
         }
         ,
         {
-          img: (this.internalCard3[0].img ? this.internalCard3[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-          title: (this.internalCard3[0].title ? this.internalCard3[0].title : ''),
-          subtitle: (this.internalCard3[0].subtitle ? this.internalCard3[0].subtitle : '')
+          img: (this.getContent().cardThreeInfo.img ? this.getContent().cardThreeInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+          title: (this.getContent().cardThreeInfo.title ? this.getContent().cardThreeInfo.title : ''),
+          subtitle: (this.getContent().cardThreeInfo.subtitle ? this.getContent().cardThreeInfo.subtitle : '')
         }
         ,
         {
-          img: (this.internalCard4[0].img ? this.internalCard4[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-          title: (this.internalCard4[0].title ? this.internalCard4[0].title : ''),
-          subtitle: (this.internalCard4[0].subtitle ? this.internalCard4[0].subtitle : '')
+          img: (this.getContent().cardFourInfo.img ? this.getContent().cardFourInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+          title: (this.getContent().cardFourInfo.title ? this.getContent().cardFourInfo.title : ''),
+          subtitle: (this.getContent().cardFourInfo.subtitle ? this.getContent().cardFourInfo.subtitle : '')
         }
         ,
         {
-          img: (this.internalCard5[0].img ? this.internalCard5[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-          title: (this.internalCard5[0].title ? this.internalCard5[0].title : ''),
-          subtitle: (this.internalCard5[0].subtitle ? this.internalCard5[0].subtitle : '')
+          img: (this.getContent().cardFiveInfo.img ? this.getContent().cardFiveInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+          title: (this.getContent().cardFiveInfo.title ? this.getContent().cardFiveInfo.title : ''),
+          subtitle: (this.getContent().cardFiveInfo.subtitle ? this.getContent().cardFiveInfo.subtitle : '')
         },
         {
-          img: (this.internalCard6[0].img ? this.internalCard6[0].img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
-          title: (this.internalCard6[0].title ? this.internalCard6[0].title : ''),
-          subtitle: (this.internalCard6[0].subtitle ? this.internalCard6[0].subtitle : '')
+          img: (this.getContent().cardSixInfo.img ? this.getContent().cardSixInfo.img : 'https://www.flaticon.com/svg/static/icons/svg/1689/1689164.svg'),
+          title: (this.getContent().cardSixInfo.title ? this.getContent().cardSixInfo.title : ''),
+          subtitle: (this.getContent().cardSixInfo.subtitle ? this.getContent().cardSixInfo.subtitle : '')
         }
       )
   
@@ -290,6 +288,7 @@ export class FunnelCards {
       anchor.addEventListener("click", function () {
         for (var i = 0; i < anchors.length; i++) {
           anchors[i].classList.remove('active');
+
          
         }
         this.classList.add('active')
@@ -298,18 +297,18 @@ export class FunnelCards {
     }
 
     anchors.forEach(item=>{
-      (item as HTMLElement).style.backgroundColor=(this.cardBgColor?this.cardBgColor:'#2c6fd1');
-      (item as HTMLElement).style.color=(this.cardTextColor?this.cardTextColor:'#fff');
-      (item as HTMLElement).style.boxShadow=`20px 20px 60px rgba(34,50,84,0.5), 1px 1px 0px 1px ${(this.cardShdowColor?this.cardShdowColor:'#3f58e3')}`;
+      (item as HTMLElement).style.backgroundColor=(this.getContent().cardBgColor?this.getContent().cardBgColor:'#2c6fd1');
+      (item as HTMLElement).style.color=(this.getContent().cardTextColor?this.getContent().cardTextColor:'#fff');
+      (item as HTMLElement).style.boxShadow=`20px 20px 60px rgba(34,50,84,0.5), 1px 1px 0px 1px ${(this.getContent().cardShdowColor?this.getContent().cardShdowColor:'#3f58e3')}`;
 
     })
   }
   render() {
     return (
 
-      <div class="FunnelCards">
-        {this.card.map(item =>
-          <div class="card first" >
+      <div class="FunnelCards NeueFrutigerWorld">
+        {this.card.map((item,index) =>
+          <div class="card first"   onClick={this.allClicked.bind(this,index)} >
             <img src={item.img}   style={{"border-radius":"50%"}}></img>
             <h3> {item.title} </h3>
             <span>{item.subtitle} </span>
