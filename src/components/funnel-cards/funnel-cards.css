@@ -3,7 +3,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -180px 0 0 -140px;
+    margin: -132px 0 0 -140px;
     user-select: none;
     transform: translate3d(0, 0, 0);
     transform-style: preserve-3d;
@@ -47,7 +47,13 @@
     margin-top: 15px;
     pointer-events: none;
     height: 66px;
-    margin-left: 30%;
+    /* margin-left: 30%; */
+}
+
+.imgContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .FunnelCards>div h3 {
